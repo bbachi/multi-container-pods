@@ -12,14 +12,14 @@ spec:
   containers:
   - image: busybox
     command: ["/bin/sh"]
-    args: ["-c", "while true; do echo 'Hi I am from Main container' >> /var/log/index.html; sleep 5;done"]
-    name: main-container
+    args: ["-c", "echo 'Hi I am from Side Car container' >> /var/log/index.html"]
+    name: sidecar-container
     resources: {}
     volumeMounts:
     - name: var-logs
       mountPath: /var/log
   - image: nginx
-    name: sidecar-container
+    name: main-container
     resources: {}
     ports:
       - containerPort: 80
